@@ -29,9 +29,11 @@ export default function BookDetailPage({ params }: { params: { id: string } }) {
     try {
       setLoading(true);
       setError(null);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-      const res = await fetch(`${apiUrl}/books/${id}`);
-      if (!res.ok) throw new Error("Book not found");
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const url = `${apiUrl}/books/${id}`;
+      console.log("Fetching from:", url);
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Failed to fetch book: ${res.status}`);
       const data = await res.json();
       setBook(data);
     } catch (err) {
