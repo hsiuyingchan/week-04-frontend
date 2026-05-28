@@ -13,10 +13,9 @@ interface Book {
 
 interface BookActionsProps {
   book: Book;
-  onBookUpdate: (updatedBook: Book) => void;
 }
 
-export default function BookActions({ book, onBookUpdate }: BookActionsProps) {
+export default function BookActions({ book }: BookActionsProps) {
   const router = useRouter();
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -36,7 +35,6 @@ export default function BookActions({ book, onBookUpdate }: BookActionsProps) {
       if (!res.ok) throw new Error("Failed to update book");
       const updated = await res.json();
       setCurrentBook(updated);
-      onBookUpdate(updated);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to update");
     } finally {
@@ -57,7 +55,6 @@ export default function BookActions({ book, onBookUpdate }: BookActionsProps) {
       if (!res.ok) throw new Error("Failed to update rating");
       const updated = await res.json();
       setCurrentBook(updated);
-      onBookUpdate(updated);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to update");
     } finally {

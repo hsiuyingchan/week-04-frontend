@@ -70,7 +70,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
           </div>
         </div>
 
-        <BookActions book={book} onBookUpdate={() => {}} />
+        <BookActions book={book} />
       </div>
     </div>
   );
